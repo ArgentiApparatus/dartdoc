@@ -221,6 +221,7 @@ dt {
 
 dd {
   color: #212121;
+  margin-bottom: 1em;
 }
 
 dd.callable, dd.constant, dd.property {
@@ -228,7 +229,7 @@ dd.callable, dd.constant, dd.property {
 }
 
 dd p {
-  margin-top: 4px;
+  margin-bottom: 0;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -258,7 +259,6 @@ dl.dl-horizontal dt::after {
 }
 
 dt .name {
-  font-size: 17px;
   font-weight: 500;
 }
 
@@ -378,10 +378,8 @@ footer .container-fluid {
   margin: 0;
 }
 
-/* The little slug line under a declaration for things like "const",
-   "read-only", etc. */
+/* The little slug line under a declaration for things like "const", "read-only", etc. */
 .features {
-  font-size: 14px;
   font-style: italic;
   color: #727272;
 }
