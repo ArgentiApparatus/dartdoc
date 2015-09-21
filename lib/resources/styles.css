@@ -149,17 +149,23 @@ pre.prettyprint {
   word-wrap: normal;
   line-height: 1.4;
   background: #f7f7f7;
-  border: 1px solid #f0f0f0;
+  border: 1px solid #ddd;
   margin: 16px 0 16px 0;
   padding: 8px;
 }
 
 pre code {
   white-space: pre;
+  word-wrap: initial;
 }
 
 .fixed {
   white-space: pre;
+}
+
+pre {
+  border: 1px solid #ddd;
+  background-color: #f7f7f7;
 }
 
 code {
@@ -210,7 +216,7 @@ header li {
 }
 
 header h1 .kind {
-  color: #DDDDDD;
+  color: #ddd;
   text-transform: uppercase;
   font-size: 15px;
 }
@@ -239,7 +245,7 @@ section.summary h2 {
   color: #727272;
   margin-bottom: 16px;
   padding-bottom: 4px;
-  border-bottom: 1px solid #DDDDDD;
+  border-bottom: 1px solid #ddd;
 }
 
 /* indents wrapped lines */
@@ -386,7 +392,10 @@ footer .container-fluid {
 }
 
 .multi-line-signature {
-  font-size: 17px;
+  font-family: 'Source Code Pro', monospace;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
 }
 
 .breadcrumbs {
@@ -394,6 +403,7 @@ footer .container-fluid {
   margin: 8px 0 8px 0;
   font-size: 17px;
   white-space: nowrap;
+  overflow-x: hidden;
   line-height: 1;
 }
 
@@ -410,11 +420,11 @@ footer .container-fluid {
 }
 
 .self-crumb {
-  color: #DDDDDD;
+  color: #ddd;
 }
 
 nav .self-name {
-  color: #DDDDDD;
+  color: #ddd;
   display: none;
 }
 
@@ -459,7 +469,7 @@ nav .self-name {
 }
 
 section.multi-line-signature div.parameters {
-  margin-left: 24px;
+  margin-left: 2em;
 }
 
 /* subnav styles */
@@ -615,7 +625,7 @@ button {
 }
 
 .sidebar-offcanvas-left h5 {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #ddd;
   padding: 16px;
 }
 
@@ -729,6 +739,6 @@ form.search {
 }
 
 section#setter {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ddd;
   padding-top: 36px;
 }

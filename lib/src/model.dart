@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-/// The models used to represent Dart code
+/// The models used to represent Dart code.
 library dartdoc.models;
 
 import 'package:analyzer/src/generated/ast.dart' show AnnotatedNode, Annotation;
@@ -1285,8 +1285,10 @@ class Enum extends Class {
 abstract class SourceCodeMixin {
   String get sourceCode {
     String contents = element.source.contents.data;
-    var node = element.computeNode(); // TODO: computeNode once we go to 0.25.2
-    // find the start of the line, so that we can line up all the indents
+    var node = element.computeNode();
+    if (node == null) return '';
+
+    // Find the start of the line, so that we can line up all the indents.
     int i = node.offset;
     while (i > 0) {
       i -= 1;
@@ -1301,10 +1303,33 @@ abstract class SourceCodeMixin {
         contents.substring(node.offset - (node.offset - i), node.end);
     String remainer = source.trimLeft();
     String indent = source.substring(0, source.length - remainer.length);
-    return source.split('\n').map((line) {
-      line = line.trimRight();
-      return line.startsWith(indent) ? line.substring(indent.length) : line;
-    }).join('\n');
+
+    bool lineComments = remainer.startsWith('///');
+    bool blockComments = remainer.startsWith('/**');
+
+    return source
+        .split('\n')
+        .map((line) {
+          line = line.trimRight();
+          return line.startsWith(indent) ? line.substring(indent.length) : line;
+        })
+        .where((String line) {
+          if (lineComments) {
+            if (line.startsWith('///')) return false;
+            lineComments = false;
+            return true;
+          } else if (blockComments) {
+            if (line.startsWith('/**')) return false;
+            if (line.contains('*/')) {
+              blockComments = false;
+              return false;
+            }
+            return false;
+          }
+
+          return true;
+        })
+        .join('\n');
   }
 
   bool get hasSourceCode => sourceCode.trim().isNotEmpty;
@@ -1489,7 +1514,10 @@ class EnumField extends Field {
   String get linkedName => name;
 }
 
-class Constructor extends ModelElement implements EnclosedElement {
+class Constructor
+    extends ModelElement
+    with SourceCodeMixin
+    implements EnclosedElement {
   ConstructorElement get _constructor => (element as ConstructorElement);
 
   Constructor(ConstructorElement element, Library library)
